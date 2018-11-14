@@ -26,3 +26,13 @@
 | POST | /todos | create new todo |
 | PUT | /todos/:id | edit todo |
 | DELETE | /todos/:id | delete todo by id |
+
+## User API
+
+> Need access token as `token` header
+
+| Method |  route | descryption |
+|--------|--------|-------------|
+| GET | /user | get user data |
+| DELETE | /user | delete user's todos and user account |
+| GET | /user/list | list all users data |
