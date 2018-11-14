@@ -15,10 +15,17 @@ const auth = function (req, res, next) {
         var user = req.db.users.findOne({id: payload.id});
         if (!user) return res.status(401).send({error: "user not found"});
 
-        req.auth = {
-            token,
-            user
+        // user to json method
+        user.json = function () {
+            return {
+                ...user, meta: undefined, $loki: undefined, password: undefined
+            };
         };
+
+        // add user and token to req object
+        req.token = token;
+        req.user = user;
+
         next();
     } catch(_) {
         return res.status(400).send({
@@ -84,11 +91,6 @@ router.post("/register", joi.register, (req, res) => {
     req.db.save();
 
     res.send(req.db.users.code(user));
-});
-
-// logout route api
-router.get("/demo", auth, (req, res) => {
-    res.send(req.auth.user);
 });
 
 module.exports = {

@@ -7,9 +7,7 @@ module.exports = function (cb) {
 
         // setup users collection
         var users = db.getCollection("users");
-        if (!users) {
-            users = db.addCollection("users");
-        }
+        if (!users) users = db.addCollection("users");
         users.code = user => {
             return {
                 ...user, meta: undefined, $loki: undefined, password: undefined

@@ -27,8 +27,8 @@ db((db) => {
 
     // load routes
     app.use(auth.router);
-    app.use(require("./api/todos"));
-    app.use(require("./api/users"));
+    app.use("/todos", require("./api/todos"));
+    app.use("/users", require("./api/users"));
 
 
     app.listen(PORT, () => console.log(`server is running on port ${PORT}`));

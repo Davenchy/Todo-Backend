@@ -20,3 +20,12 @@ module.exports.login = function (req, res, next) {
     req.joi = { value, error: (error)? error.details[0] : null };
     next();
 };
+
+// check new todo credentials
+module.exports.todo = function (req, res, next) {
+    const {error, value} = joi.validate(req.body, {
+        body: joi.string().required()
+    });
+    req.joi = { value, error: (error)? error.details[0] : null };
+    next();
+};
