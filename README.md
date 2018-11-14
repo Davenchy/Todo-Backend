@@ -1,4 +1,5 @@
-# TODO Backend
+# Todo-Backend
+todo backend server
 
 ## Auth API
 
@@ -19,6 +20,9 @@
 
 > Need access token as `token` header
 
+### For creation and edition:
+- body: String
+
 | Method |  route | descryption |
 |--------|--------|-------------|
 | GET | /todos | list all todos |
@@ -35,4 +39,3 @@
 |--------|--------|-------------|
 | GET | /user | get user data |
 | DELETE | /user | delete user's todos and user account |
-| GET | /user/list | list all users data |
