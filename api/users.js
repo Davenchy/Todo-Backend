@@ -2,7 +2,7 @@ const router = require("express").Router();
 const auth = require('../utils/auth').auth;
 
 router.get("/", auth, (req, res) => {
-    res.send(req.user.json());
+    res.send(req.user.code());
 });
 
 // router.get("/list", auth, (req, res) => {

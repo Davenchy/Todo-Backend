@@ -11,9 +11,6 @@ db((db) => {
     // log that database is read
     console.log("database is ready");
 
-    // load auth system
-    const auth = require("./utils/auth");
-
     // setup express app
     app.use(morgan("combined"));
     // app.use(cors());
@@ -26,10 +23,13 @@ db((db) => {
     });
 
     // load routes
-    app.use(auth.router);
+    app.use(require("./utils/auth").router);
     app.use("/todos", require("./api/todos"));
     app.use("/user", require("./api/users"));
+    app.all('*', (req, res) => {
+        res.status(404).send({error: "route not found"})
+    });
 
-
+    // start listening
     app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
 });

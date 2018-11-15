@@ -16,7 +16,7 @@ const auth = function (req, res, next) {
         if (!user) return res.status(401).send({error: "user not found"});
 
         // user to json method
-        user.json = function () {
+        user.code = function () {
             return {
                 ...user, meta: undefined, $loki: undefined, password: undefined
             };
@@ -56,7 +56,7 @@ router.post("/login", joi.login, (req, res) => {
         id: user.id
     }, TOKEN_SECRET, { expiresIn: TOKEN_EXPIRES });
 
-    // send token
+    // send data
     res.send({
         ...req.db.users.code(user),
         token
@@ -85,8 +85,6 @@ router.post("/register", joi.register, (req, res) => {
     user = req.db.users.insert({
         id: uuid(), ...joi.value, password
     });
-
-    console.log()
 
     req.db.save();
 
